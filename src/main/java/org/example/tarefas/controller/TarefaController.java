@@ -2,6 +2,7 @@ package org.example.tarefas.controller;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.example.tarefas.exception.TarefaNaoAchada;
 import org.example.tarefas.model.Tarefa;
+import org.example.tarefas.service.TarefaService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,8 +20,10 @@ import java.util.ArrayList;
 @RequestMapping("api/v1/tarefas")
 public class TarefaController {
 
-    static
-    public TarefaController() {
+    static TarefaService service;
+
+    public TarefaController(TarefaService tarefaService) {
+        this.service = tarefaService;
     }
 
     @GetMapping("")
@@ -28,6 +31,7 @@ public class TarefaController {
 
         try {
 
+            return ResponseEntity.ok(service.getTarefas());
 
         }catch (RuntimeException e){
 
